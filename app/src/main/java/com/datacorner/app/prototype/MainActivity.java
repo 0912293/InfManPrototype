@@ -62,33 +62,39 @@ public class MainActivity  extends AppCompatActivity {
     public void chartData(ResultSet rs){
 
         String companyName;
+        String visualType;
+        String companySector;
         int postLikes;
         int postComments;
 
         Map<String, Integer> likeDictionary = new HashMap<>();
         Map<String, Integer> commentDictionary = new HashMap<>();
 
+        String sectorVisualType;
+
         try {
             while(rs.next()){
-                companyName = rs.getString("CompanyName");
+                visualType = rs.getString("VisualType");
+                companySector = rs.getString("CompanySector");
                 postLikes = rs.getInt("PostLikes");
                 postComments = rs.getInt("PostComments");
 
+                sectorVisualType = companySector + "-" + visualType;
                 //Retrieve by column name
-                if(likeDictionary.get(companyName) == null){
-                    likeDictionary.put(companyName, postLikes);
+                if(likeDictionary.get(sectorVisualType) == null){
+                    likeDictionary.put(sectorVisualType, postLikes);
                 }
                 else{
-                    int a = likeDictionary.get(rs.getString("CompanyName"));
-                    likeDictionary.replace(companyName, a + postLikes);
+                    int a = likeDictionary.get(sectorVisualType);
+                    likeDictionary.replace(sectorVisualType, a + postLikes);
                 }
 
-                if(commentDictionary.get(rs.getString("CompanyName")) == null){
-                    commentDictionary.put(rs.getString("CompanyName"), rs.getInt("PostComments"));
+                if(commentDictionary.get(sectorVisualType) == null){
+                    commentDictionary.put(sectorVisualType, rs.getInt("PostComments"));
                 }
                 else{
-                    int a = commentDictionary.get(rs.getString("CompanyName"));
-                    commentDictionary.replace(companyName, a + postComments);
+                    int a = commentDictionary.get(sectorVisualType);
+                    commentDictionary.replace(sectorVisualType, a + postComments);
                 }
 
 //                PostLikes  = rs.getInt("PostLikes");
