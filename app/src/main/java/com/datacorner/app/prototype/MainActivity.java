@@ -132,6 +132,8 @@ public class MainActivity  extends AppCompatActivity {
 
         // Create a data object from the dataSet
         BarData data = new BarData(dataSet);
+        data.setBarWidth(1f);
+
         // Format data as percentage
 //        data.setValueFormatter(new PercentFormatter());
 
@@ -139,15 +141,14 @@ public class MainActivity  extends AppCompatActivity {
         barChart.setData(data);
 
         // Create the labels for the bars
-//        final ArrayList<String> xVals = new ArrayList<>();
-//        xVals.add("Present");
-//        xVals.add("Pres. Continuous");
-//        xVals.add("Simple Past");
-//        xVals.add("Past Perfect");
+
 
 
         // Display labels for bars
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(lobels));
+        barChart.getXAxis().setSpaceMax(-10f);
+        barChart.getXAxis().setLabelRotationAngle(45f);
+        barChart.setVisibleXRangeMaximum(20);
 
         // Set the maximum value that can be taken by the bars
         //barChart.getAxisLeft().setAxisMaximum(100);
@@ -156,7 +157,6 @@ public class MainActivity  extends AppCompatActivity {
         barChart.animateXY(1000, 1000);
         // Display scores inside the bars
         barChart.setDrawValueAboveBar(false);
-
         // Hide grid lines
         barChart.getAxisLeft().setEnabled(false);
         barChart.getAxisRight().setEnabled(false);

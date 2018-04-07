@@ -85,7 +85,7 @@ public class FirstExample {
             Log.d("Creating", "Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT cs.CompanySector, vi.VisualType, pf.PostComments, pf.PostLikes FROM CompanySector cs, PostFacts pf, VisualInformation vi WHERE pf.VisualInformationID = vi.VisualInformationID AND pf.CompanySector_id = cs.CompanySector_id;";
+            sql = "SELECT TOP(100) cs.CompanySector, vi.VisualType, pf.PostComments, pf.PostLikes FROM CompanySector cs, PostFacts pf, VisualInformation vi WHERE pf.VisualInformationID = vi.VisualInformationID AND pf.CompanySector_id = cs.CompanySector_id;";
             rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
